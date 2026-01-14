@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}Todo Ekle{% endblock %}
+
+{% block content %}
+
+<div class="card shadow p-4 mx-auto" style="max-width: 700px;">
+    <h4 class="mb-3 text-center">Yeni Todo Ekle</h4>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <!-- Todo Başlığı -->
+        <div class="mb-3">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control") }}
+            {% for error in form.title.errors %}
+                <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Todo İçeriği -->
+        <div class="mb-3">
+            {{ form.content.label(class="form-label") }}
+            {{ form.content(class="form-control", rows=6) }}
+            {% for error in form.content.errors %}
+                <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <!-- Todo Görseli (Opsiyonel) -->
+        <div class="mb-3">
+            {{ form.image.label(class="form-label") }}
+            {{ form.image(class="form-control") }}
+        </div>
+
+        <div class="d-grid">
+            {{ form.submit(class="btn btn-success") }}
+        </div>
+    </form>
+</div>
+
+{% endblock %}

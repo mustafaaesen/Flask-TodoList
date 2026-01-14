@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}TodoList{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/todofavicon.png') }}">
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Dashboard CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+
+</head>
+<body>
+
+<!-- MOBILE HEADER -->
+<header class="mobile-header d-lg-none">
+    <button id="sidebarToggle" class="btn btn-light">
+        <i class="fa fa-bars"></i>
+    </button>
+    <span class="fw-semibold">TodoList</span>
+</header>
+
+<div class="app-wrapper">
+
+    <!-- SIDEBAR -->
+    {% include "includes/sidebar.html" %}
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content w-100 d-flex flex-column">
+
+        <!-- FLASH -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show mb-3">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <!-- PAGE CONTENT -->
+        <div class="content-wrapper flex-fill">
+            {% block content %}{% endblock %}
+        </div>
+
+        <!-- FOOTER (SADECE CONTENT ALTINDA) -->
+        {% include "includes/footer.html" %}
+
+    </main>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById("sidebarToggle")?.addEventListener("click", function () {
+    document.getElementById("sidebar").classList.toggle("active");
+});
+</script>
+
+</body>
+</html>

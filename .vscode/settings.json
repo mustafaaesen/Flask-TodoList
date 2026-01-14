@@ -1,0 +1,23 @@
+{
+  "files.associations": {
+    "*.html": "jinja-html"
+  },
+  "emmet.includeLanguages": {
+    "jinja-html": "html",
+    "django-html": "html"
+  },
+  "auto-close-tag.activationOnLanguage": [
+    "html",
+    "xml",
+    "jinja-html",
+    "django-html"
+  ],
+  "auto-rename-tag.activationOnLanguage": [
+    "html",
+    "xml",
+    "jinja-html",
+    "django-html"
+  ],
+  "editor.autoClosingTags": "always",
+  "editor.autoClosingBrackets": "always"
+}

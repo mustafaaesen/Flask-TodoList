@@ -1,0 +1,51 @@
+<footer class="app-footer mt-auto">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+
+            <!-- Left -->
+            <div class="col-md-4 text-center text-md-start">
+                © <span id="footer-year"></span> TodoList
+            </div>
+
+            <!-- Center -->
+            <div class="col-md-4 text-center">
+                <div class="footer-social">
+                    <a href="https://github.com/mustafaaesen" target="_blank">
+                        <i class="fa fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/mustafaesen" target="_blank">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="https://mustafaesen.com.tr" target="_blank">
+                        <i class="fa fa-globe"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right -->
+            <div class="col-md-4 text-center text-md-end">
+                Made by
+                <a href="https://mustafaesen.com.tr"
+                   target="_blank"
+                   class="footer-author">
+                    Mustafa Esen
+                </a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("footer-year").textContent =
+        new Date().getFullYear();
+</script>

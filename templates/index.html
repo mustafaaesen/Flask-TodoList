@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+{% block title %}Ana Sayfa{% endblock %}
+{% block content %}
+
+<div class="card shadow-sm p-4">
+
+    <!-- SLIDER -->
+    <div id="homeCarousel" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- INDICATORS -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="2"></button>
+        </div>
+
+        <!-- SLIDES -->
+        <div class="carousel-inner rounded">
+
+            <!-- SLIDE 1 -->
+            <div class="carousel-item active">
+                <img src="{{ url_for('static', filename='img/slider1.webp') }}"
+                     class="d-block w-100"
+                     alt="Todo Yönetimi">
+
+                <div class="carousel-cta text-center">
+                    <a href="{{ url_for('login') }}"
+                       class="btn btn-primary btn-lg px-5">
+                        Hemen Dene
+                    </a>
+                </div>
+            </div>
+
+            <!-- SLIDE 2 -->
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/slider2.webp') }}"
+                     class="d-block w-100"
+                     alt="Verimli Çalış">
+
+                <div class="carousel-cta text-center">
+                    <a href="{{ url_for('login') }}"
+                       class="btn btn-primary btn-lg px-5">
+                        Hemen Dene
+                    </a>
+                </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="carousel-item">
+                <img src="{{ url_for('static', filename='img/slider3.webp') }}"
+                     class="d-block w-100"
+                     alt="Hedeflerine Ulaş">
+
+                <div class="carousel-cta text-center">
+                    <a href="{{ url_for('login') }}"
+                       class="btn btn-primary btn-lg px-5">
+                        Hemen Dene
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#homeCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#homeCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,236 @@
+{% extends "layout.html" %}
+{% block title %}Tamamlanan Görevler{% endblock %}
+
+{% block content %}
+
+{% set PRIORITY_LABELS = {
+    'high': 'Yüksek',
+    'medium': 'Orta',
+    'low': 'Düşük'
+} %}
+
+<div class="card shadow-sm w-100">
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="mb-0">✅ Tamamlanan Görevler</h4>
+
+            <a href="{{ url_for('addtodo') }}" class="btn btn-success btn-sm">
+                <i class="fa fa-plus"></i> Yeni Todo
+            </a>
+        </div>
+
+        <hr>
+
+        {% if todos == [] %}
+            <div class="alert alert-info mb-0">
+                Henüz tamamlanan todo yok.
+            </div>
+        {% else %}
+            <table class="table table-hover align-middle mb-0 w-100">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>#</th>
+                        <th class="text-start">Görev</th>
+                        <th>Durum</th>
+                        <th>Öncelik</th>
+                        <th>İşlem</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for todo in todos %}
+                    <tr class="table-success text-decoration-line-through">
+                        <td class="text-center">{{ todo.id }}</td>
+
+                        <!-- TITLE → VIEW MODAL -->
+                        <td>
+                            <a href="#"
+                               class="fw-semibold text-decoration-none"
+                               data-bs-toggle="modal"
+                               data-bs-target="#viewTodoModal{{ todo.id }}">
+                                {{ todo.title }}
+                            </a>
+                        </td>
+
+                        <!-- STATUS (DONE → ACTIVE toggle) -->
+                        <td class="text-center">
+                            <form method="POST"
+                                  action="{{ url_for('toggle_todo_status', id=todo.id) }}">
+                                <button type="submit"
+                                        class="btn btn-sm btn-success">
+                                    ✔ Tamamlandı
+                                </button>
+                            </form>
+                        </td>
+
+                        <!-- PRIORITY -->
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle
+                                    {% if todo.priority == 'high' %}btn-danger
+                                    {% elif todo.priority == 'medium' %}btn-warning
+                                    {% else %}btn-success{% endif %}"
+                                    data-bs-toggle="dropdown">
+                                    {{ PRIORITY_LABELS[todo.priority] }}
+                                </button>
+
+                                <ul class="dropdown-menu">
+                                    {% for p,label,color in [
+                                        ('high','Yüksek','danger'),
+                                        ('medium','Orta','warning'),
+                                        ('low','Düşük','success')
+                                    ] %}
+                                    <li>
+                                        <form method="POST"
+                                              action="{{ url_for('update_todo_priority', id=todo.id) }}">
+                                            <input type="hidden" name="priority" value="{{ p }}">
+                                            <button class="dropdown-item text-{{ color }}" type="submit">
+                                                {{ label }}
+                                            </button>
+                                        </form>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </td>
+
+                        <!-- ACTIONS -->
+                        <td class="text-center">
+                            <button class="btn btn-outline-secondary btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#editTodoModal{{ todo.id }}">
+                                <i class="fa fa-edit"></i>
+                            </button>
+
+                            <button class="btn btn-outline-danger btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal{{ todo.id }}">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- VIEW MODAL -->
+                    <div class="modal fade" id="viewTodoModal{{ todo.id }}" tabindex="-1">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">{{ todo.title }}</h5>
+                                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p class="text-muted">{{ todo.content }}</p>
+
+                                    {% if todo.image %}
+                                    <img src="{{ url_for('static', filename=todo.image) }}"
+                                         class="img-fluid rounded mt-3">
+                                    {% endif %}
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                        Kapat
+                                    </button>
+
+                                    <button class="btn btn-primary"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editTodoModal{{ todo.id }}"
+                                            data-bs-dismiss="modal">
+                                        Düzenle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EDIT MODAL -->
+                    <div class="modal fade" id="editTodoModal{{ todo.id }}" tabindex="-1">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <form method="POST"
+                                      enctype="multipart/form-data"
+                                      action="{{ url_for('dashboard_todo_update', id=todo.id) }}">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">✏️ Todo Düzenle</h5>
+                                        <button class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Başlık</label>
+                                            <input type="text" name="title"
+                                                   class="form-control"
+                                                   value="{{ todo.title }}" required>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">İçerik</label>
+                                            <textarea name="content"
+                                                      class="form-control"
+                                                      rows="4"
+                                                      required>{{ todo.content }}</textarea>
+                                        </div>
+
+                                        {% if todo.image %}
+                                        <img src="{{ url_for('static', filename=todo.image) }}"
+                                             class="img-fluid rounded mb-3">
+                                        {% endif %}
+
+                                        <input type="file" name="image" class="form-control">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                            İptal
+                                        </button>
+                                        <button type="submit" class="btn btn-success">
+                                            Kaydet
+                                        </button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DELETE MODAL -->
+                    <div class="modal fade" id="deleteModal{{ todo.id }}" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-danger">Todo Sil</h5>
+                                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <strong>{{ todo.title }}</strong> silinsin mi?
+                                    <p class="text-muted small">Bu işlem geri alınamaz.</p>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                        İptal
+                                    </button>
+                                    <form method="POST"
+                                          action="{{ url_for('delete_todo', id=todo.id) }}">
+                                        <button type="submit" class="btn btn-danger">
+                                            Sil
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

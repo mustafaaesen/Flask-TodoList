@@ -1,0 +1,69 @@
+<aside class="sidebar d-flex flex-column" id="sidebar">
+
+    <!-- HEADER -->
+    <div class="sidebar-header mb-4">
+        <h5 class="mb-1">
+            <a class="nav-link p-0 fw-bold" href="{{ url_for('index') }}">
+                📝 TodoList
+            </a>
+        </h5>
+
+        {% if session.get("logged_in") %}
+            <small class="text-muted">{{ session.get("username") }}</small>
+        {% else %}
+            <small class="text-muted">Görev eklemek için giriş yapın</small>
+        {% endif %}
+    </div>
+
+    <!-- MENU -->
+    <ul class="nav flex-column sidebar-menu">
+
+        {% if session.get("logged_in") %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dashboard') }}">
+                    <i class="fa fa-table me-2"></i> Kontrol Paneli
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('active_todos') }}">
+                    <i class="fa fa-inbox me-2"></i> Aktif
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('done_todos') }}">
+                    <i class="fa fa-check me-2"></i> Tamamlandı
+                </a>
+            </li>
+
+         
+
+        {% else %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">
+                    <i class="fa fa-user-plus me-2"></i> Kayıt Ol
+                </a>
+            </li>
+
+        {% endif %}
+    </ul>
+
+    <!-- FOOTER -->
+    <div class="sidebar-footer pt-3 border-top">
+
+        {% if session.get("logged_in") %}
+            <a href="{{ url_for('logout') }}" class="btn btn-danger w-100">
+                <i class="fa fa-sign-out-alt me-2"></i> Çıkış Yap
+            </a>
+        {% else %}
+            <a href="{{ url_for('login') }}" class="btn btn-success w-100">
+                <i class="fa fa-sign-in-alt me-2"></i> Giriş Yap
+            </a>
+        {% endif %}
+
+    </div>
+
+</aside>

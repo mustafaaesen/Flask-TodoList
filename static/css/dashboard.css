@@ -1,0 +1,255 @@
+/* ===============================
+   GLOBAL LAYOUT
+================================ */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.app-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f4f6f9;
+}
+
+/* ===============================
+   SIDEBAR
+================================ */
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    background-color: #0b3c5d;
+    color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+    z-index: 1040;
+    overflow: hidden;
+}
+
+/* SIDEBAR HEADER */
+.sidebar-header a,
+.sidebar-header small {
+    color: #ffffff !important;
+}
+
+/* MENU (SCROLLABLE AREA) */
+.sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.sidebar-menu .nav-link {
+    color: #ffffff !important;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.sidebar-menu .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-menu .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.22);
+}
+
+/* SIDEBAR FOOTER */
+.sidebar-footer {
+    flex-shrink: 0;
+    padding-top: 12px;
+}
+
+/* ===============================
+   MAIN CONTENT
+================================ */
+.main-content {
+    flex: 1;
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* PAGE CONTENT */
+.content-wrapper {
+    flex: 1;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.app-footer {
+    border-top: 1px solid #e5e5e5;
+    background: #ffffff;
+    padding: 15px 0;
+    font-size: 14px;
+    color: #0b3c5d;
+}
+
+.footer-author {
+    color: #0b3c5d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.footer-author:hover {
+    color: #4da3ff;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin: 0 6px;
+    color: #0b3c5d;
+    font-size: 18px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-social a:hover {
+    color: #4da3ff;
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   CARD / TABLE
+================================ */
+.card {
+    border-radius: 10px;
+    border: none;
+}
+
+.card.shadow-sm {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.card,
+.card-body {
+    overflow: visible;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+/* ===============================
+   DROPDOWN / BUTTON
+================================ */
+.dropdown-menu {
+    z-index: 1055;
+}
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 0.85rem;
+}
+
+/* ===============================
+   MOBILE HEADER
+================================ */
+.mobile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 1050;
+}
+
+/* ===============================
+   SLIDER (CAROUSEL)
+================================ */
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* CTA button */
+.carousel-cta {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+/* ===============================
+   SLIDER CONTROLS
+================================ */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 991px) {
+
+    .app-wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 56px;
+        left: 0;
+        height: calc(100vh - 56px);
+        transform: translateX(-100%);
+        box-shadow: 4px 0 16px rgba(0,0,0,0.1);
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        padding: 16px;
+    }
+}
+
+/* ===============================
+   MOBILE SLIDER FIXES
+================================ */
+@media (max-width: 768px) {
+
+    /* Mobilde slider okları kapalı */
+    .carousel-control-prev,
+    .carousel-control-next {
+        display: none !important;
+    }
+
+    /* CTA mobilde geniş */
+    .carousel-cta .btn {
+        width: 90%;
+        font-size: 1rem;
+        padding: 12px;
+    }
+}
+
+/* ===============================
+   AUTH LINKS
+================================ */
+.register-link {
+    color: #0b3c5d;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
