@@ -13,14 +13,17 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from werkzeug.security import check_password_hash
 from flask import session
-
+from dotenv import load_dotenv
+import os
 
 app=Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"]="sqlite:////home/esen/Masaüstü/TodoApp/todo.db"#sqlite bağlantı konfugirasyonu
-                                            #oluşturulan veritabnı doyası todo.db ile proje dosyasının birleştirilmesi
-db=SQLAlchemy(app)#veritabanı nesnesi oluşturma
-app.secret_key = "esen-todo-app-secret-key"
+load_dotenv()
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
+app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+
+db = SQLAlchemy(app)
 
 limiter = Limiter(
     key_func=get_remote_address,
@@ -587,7 +590,3 @@ def done_todos():
     return render_template("done.html",todos=todos)
 
 
-if __name__ == "__main__":
-    with app.app_context():      # <— context’i aç
-        db.create_all()          # tabloyu oluştur
-    app.run(host="0.0.0.0", port=5000,debug=True)
