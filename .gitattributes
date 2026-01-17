@@ -1,0 +1,12 @@
+# Force repo language to Python
+* linguist-language=Python
+
+# Frontend files should not affect language stats
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+
+# Static assets
+*.png linguist-detectable=false
+*.jpg linguist-detectable=false
+*.svg linguist-detectable=false
