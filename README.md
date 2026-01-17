@@ -4,7 +4,14 @@ Bu proje, Flask framework’ü kullanılarak geliştirilmiş, kullanıcı bazlı
 Amaç; kullanıcı kimlik doğrulaması, CRUD işlemleri, durum ve öncelik yönetimi gibi temel web uygulaması kavramlarını gerçekçi bir yapı içerisinde göstermek ve portföy (CV) projesi olarak sunmaktır.
 
 ---
+Projenin canlı çalışan halini görmek için aşağıdaki bağlantıyı ziyaret edebilirsiniz:
+FlaskTodoList → https://flasktodolistapp.pythonanywhere.com/
 
+---
+
+## Proje Mimarisi
+
+![Proje Mimarisi](screenshots/dovizceviriciarch.png)
 ## Projenin Amacı
 
 Flask ekosistemi, veritabanı yönetimi, kullanıcı oturumları ve temel güvenlik pratiklerini kapsayan uçtan uca bir örnek sunar.
