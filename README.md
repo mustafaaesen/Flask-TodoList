@@ -11,7 +11,7 @@ FlaskTodoList → https://flasktodolistapp.pythonanywhere.com/
 
 ## Proje Mimarisi
 
-![Proje Mimarisi](screenshots/dovizceviriciarch.png)
+![Proje Mimarisi](static/screenshots/TodoListArch.png)
 ## Projenin Amacı
 
 Flask ekosistemi, veritabanı yönetimi, kullanıcı oturumları ve temel güvenlik pratiklerini kapsayan uçtan uca bir örnek sunar.
